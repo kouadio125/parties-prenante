@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIRAH - PONADEPA2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vert-primary: #006B3F;
+            --vert-dark: #004D2C;
+            --vert-light: #E8F5E9;
+            --orange-accent: #FF6D00;
+            --orange-light: #FFF3E0;
+            --blanc: #FFFFFF;
+            --gris-clair: #F8F9FA;
+            --gris-texte: #495057;
+            --shadow-soft: 0 4px 20px rgba(0, 107, 63, 0.1);
+            --shadow-hover: 0 8px 30px rgba(0, 107, 63, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: linear-gradient(135deg, var(--vert-light) 0%, var(--blanc) 50%, var(--orange-light) 100%);
+            min-height: 100vh;
+            color: var(--gris-texte);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--vert-primary) 0%, var(--vert-dark) 100%);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 15s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .flag-bar {
+            display: flex;
+            width: 60px;
+            height: 40px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .flag-orange { background: #FF6D00; flex: 1; }
+        .flag-white { background: #FFFFFF; flex: 1; }
+        .flag-green { background: #006B3F; flex: 1; }
+
+        .ministry-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--blanc);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+        }
+
+        .ministry-subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.9);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .header-tagline {
+            margin-top: 1.5rem;
+            padding: 0.75rem 2rem;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 0.95rem;
+            color: var(--blanc);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .intro-text {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .intro-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--vert-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-text p {
+            font-size: 1.1rem;
+            color: var(--gris-texte);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Categories */
+        .category {
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .category:nth-child(2) { animation-delay: 0.1s; }
+        .category:nth-child(3) { animation-delay: 0.2s; }
+        .category:nth-child(4) { animation-delay: 0.3s; }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--vert-primary);
+        }
+
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--vert-primary), var(--vert-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--vert-dark);
+            font-weight: 600;
+        }
+
+        /* Document Cards */
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .doc-card {
+            background: var(--blanc);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 107, 63, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--vert-primary), var(--orange-accent));
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .doc-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .doc-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--vert-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .doc-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--vert-dark);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .doc-description {
+            font-size: 0.9rem;
+            color: var(--gris-texte);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .doc-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .doc-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--vert-primary), var(--vert-dark));
+            color: var(--blanc);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(135deg, var(--orange-accent), #E65100);
+            transform: scale(1.02);
+        }
+
+        .download-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--vert-dark);
+            color: var(--blanc);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .footer-contact {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .ministry-title {
+                font-size: 1.4rem;
+            }
+            
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .intro-text h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <div class="flag-bar">
+                    <div class="flag-orange"></div>
+                    <div class="flag-white"></div>
+                    <div class="flag-green"></div>
+                </div>
+            </div>
+            <h1 class="ministry-title">MINISTÈRE DES RESSOURCES ANIMALES ET HALIEUTIQUES</h1>
+            <p class="ministry-subtitle">République de Côte d'Ivoire</p>
+            <div class="header-tagline">📚 Centre de Documentation Officiel</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="intro-text">
+            <h2>Bienvenue à l'Atelier d'implication des parties prenantes dans le Processus de validation de la Politique Nationale de Développement de l'Elevage, de la Pêche et l'Aquaculture (PONADEPA2)</h2>
+            <p>Accédez à nos documents officiels, rapports et publications. Sélectionnez et téléchargez les ressources dont vous avez besoin.</p>
+        </div>
+
+        <!-- Catégorie : Politiques et Stratégies -->
+        <section class="category">
+            <div class="category-header">
+                <div class="category-icon">📋</div>
+                <h3 class="category-title">Politiques et Stratégies</h3>
+            </div>
+            <div class="documents-grid">
+                <div class="doc-card">
+                    <div class="doc-icon">📄</div>
+                    <h4 class="doc-title">PONADEPA 2022-2026</h4>
+                    <p class="doc-description">TDR de l'atelier</p>
+                    <div class="doc-meta">
+                        <span>📁 PDF</span>
+                        <span>📏 2.5 MB</span>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1U7PjJHtc6Mv9hE0lWq8-6KMMsr6w5RNc?usp=drive_link" class="download-btn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Télécharger
+                    </a>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-icon">📄</div>
+                    <h4 class="doc-title">Processus de revue PONADEPA 2026-2030</h4>
+                    <p class="doc-description">TDR des commissions</p>
+                    <div class="doc-meta">
+                        <span>📁 PDF</span>
+                        <span>📏 1.8 MB</span>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1OYwbqoKUOc0DfCRCt6QxSlyXIsQiNY7E?usp=drive_link" class="download-btn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Télécharger
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catégorie : Élevage -->
+        <section class="category">
+            <div class="category-header">
+                <div class="category-icon">📄</div>
+                <h3 class="category-title">Rapport de l'atelier</h3>
+            </div>
+            <div class="documents-grid">
+                <div class="doc-card">
+                    <div class="doc-icon">📄</div>
+                    <h4 class="doc-title">Rapport</h4>
+                    <div class="doc-meta">
+                        <span>📁 PDF</span>
+                        <span>📏 3.2 MB</span>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/1op5LfrycWSQHtpM_hQzg5AS-LKSaKSeD?usp=drive_link" class="download-btn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Télécharger
+                    </a>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-icon">📄</div>
+                    <h4 class="doc-title">Compte-rendu des travaux en commission</h4>
+                    <p class="doc-description">Compte-rendu</p>
+                    <div class="doc-meta">
+                        <span>📁 PDF</span>
+                        <span>📏 1.5 MB</span>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/10yp6fK6-H1sGoQ7fvo5xA7wrlA1AJkLF?usp=drive_link" 
+                class="download-btn" 
+                target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Télécharger
+                </a>
+                </div>
+                
+
+                                <div class="doc-card">
+                    <div class="doc-icon">📄</div>
+                    <h4 class="doc-title">Termes de reférence</h4>
+                    <p class="doc-description">TDR</p>
+                    <div class="doc-meta">
+                        <span>📁 PDF</span>
+                        <span>📏 1.5 MB</span>
+                    </div>
+                    <a href="https://drive.google.com/drive/folders/10yp6fK6-H1sGoQ7fvo5xA7wrlA1AJkLF?usp=drive_link" 
+                class="download-btn" 
+                target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Télécharger
+                </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">MIRAH-DPSP - Côte d'Ivoire</div>
+        <p class="footer-text">Ministère des Ressources Animales et Halieutiques</p>
+        <p class="footer-contact">📍 Abidjan, Plateau | 20 218 875</p>
+    </footer>
+</body>
+
+</html>
+
+
+
+
+
+
